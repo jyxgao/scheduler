@@ -11,7 +11,10 @@ import { useVisualMode } from '../hooks/useVisualMode';
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
-const SAVING = "SAVING"
+const SAVING = "SAVING";
+const CONFIRM = "CONFIRM";
+const DELETING = "DELETING";
+const EDIT = "EDIT";
 
 const Appointment = props => {
   const {mode, transition, back } = useVisualMode(
@@ -19,14 +22,13 @@ const Appointment = props => {
   );
 
   // get name, interviewer from Form input
-  const save = (name, interviewer) => {
+  const onSave = (name, interviewer) => {
     const interview = {
       student: name,
       interviewer: interviewer
     }
 
     transition(SAVING);
-
     props.bookInterview(props.id, interview)
     .then(() => transition(SHOW))
     .catch(err => {
@@ -34,9 +36,14 @@ const Appointment = props => {
     })
   }
 
-  // const back = () => {
-    
-  // }
+  const remove = () => {
+    transition(DELETING);
+    props.cancelInterview(props.id)
+    .then(() => transition(EMPTY))
+    .catch(err => {
+      console.log(err)
+    })
+  }
 
   return (
     <article 
@@ -50,14 +57,33 @@ const Appointment = props => {
       <Show
         student={props.interview.student}
         interviewer={props.interview.interviewer}
+        onDelete={() => transition(CONFIRM)}
+        onEdit={() => transition(EDIT)}
       />
     )}
     {mode === CREATE && (<Form 
       interviewers={props.interviewers}
       onCancel={() => back(EMPTY)}
-      onSave={save}
+      onSave={onSave}
     />)}
-    {mode === SAVING && (<Status />)}
+    {mode === SAVING && (<Status 
+      message="Saving"
+    />)}
+    {mode === CONFIRM && (<Confirm 
+      message="Are you sure?"
+      onCancel={() => back(SHOW)}
+      onConfirm={remove}
+    />)}
+    {mode === DELETING && (<Status 
+      message="Deleting"
+    />)}
+    {mode === EDIT && <Form 
+      interviewers={props.interviewers}
+      onCancel={() => back(EMPTY)}
+      onSave={onSave}
+      name={props.interview.student}
+      interviewer={props.interview.interviewer.id}
+    />}
     </article>
   )
 

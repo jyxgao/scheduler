@@ -28,11 +28,21 @@ export default function Application(props) {
   }
 
   const cancelInterview = (appointmentId) => {
-    return axios.put(`/api/appointments/${appointmentId}`, null)
+    const appointment = {
+      ...state.appointments[appointmentId],
+      interview: null
+    }
+
+    const appointments = {
+      ...state.appointments,
+      [appointmentId]: appointment
+    }
+
+    return axios.delete(`http://localhost:8001/api/appointments/${appointmentId}`, appointment)
             .then(res => {
               setState(prev => ({
                 ...prev,
-                // appointments
+                appointments
               }))
             })
   }
@@ -100,6 +110,7 @@ export default function Application(props) {
             interview={interview}
             interviewers={interviewers}
             bookInterview={bookInterview}
+            cancelInterview={cancelInterview}
             // time={appointment.time}
             // interview={appointment.interview}
           />)
