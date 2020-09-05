@@ -6,8 +6,36 @@ import Appointment from 'components/Appointment/index';
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from '../helpers/selectors';
 
 export default function Application(props) {
-  // const [day, setDay] = useState("Monday");
-  // const [days, setDays] = useState([]);
+  const bookInterview = (appointmentId, interview) => {
+    const appointment = {
+      // get current interview
+      ...state.appointments[appointmentId],
+      // replace interview
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [appointmentId]: appointment
+    }
+
+    return axios.put(`/api/appointments/${appointmentId}`, appointment)
+            .then(res => {
+                setState((prev) => ({
+                  ...prev,
+                  appointments
+              }))
+            })
+  }
+
+  const cancelInterview = (appointmentId) => {
+    return axios.put(`/api/appointments/${appointmentId}`, null)
+            .then(res => {
+              setState(prev => ({
+                ...prev,
+                // appointments
+              }))
+            })
+  }
 
   const [state, setState] = useState({
     day: "Monday",
@@ -39,12 +67,6 @@ export default function Application(props) {
       day: day
     }))
 
-  // const setDays = days =>
-  //   setState(prev => ({
-  //     ...prev,
-  //     days
-  //   }))  
-
   return (
     <main className="layout">
       <section className="sidebar">
@@ -72,9 +94,12 @@ export default function Application(props) {
           const interview = getInterview(state, appointment.interview);
           const interviewers = getInterviewersForDay(state, state.day);
           return (<Appointment 
-            key={appointment.id} {...appointment}
+            key={appointment.id}
+            id={appointment.id} 
+            time={appointment.time} {...appointment}
             interview={interview}
             interviewers={interviewers}
+            bookInterview={bookInterview}
             // time={appointment.time}
             // interview={appointment.interview}
           />)
