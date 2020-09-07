@@ -1,4 +1,4 @@
-import { getAppointmentsForDay, getInterview } from "../selectors";
+import { getAppointmentsForDay, getInterview, getSpotsRemaining } from "../selectors";
 import { getInterviewersForDay } from "../selectors";
 
 const state = {
@@ -54,6 +54,19 @@ const state = {
     }
   }
 };
+
+//getSpotsRemaining tests
+test("getSpotsRemaining returns a number", () => {
+  const result = getSpotsRemaining(state, "Monday");
+  expect(typeof result).toEqual("number");
+})
+
+test("getSpotsRemaining to return the number of null interviews", () => {
+  const result = getSpotsRemaining(state, "Monday");
+  const result2 = getSpotsRemaining(state, "Tuesday")
+  expect(result).toEqual(2);
+  expect(result2).toEqual(1);
+})
 
 // getInterviewsForDay tests
 test("getInterviewersForDay returns an array", () => {
