@@ -21,14 +21,3 @@ export default function Button(props) {
     </button>
   );
 }
-
-
-  // let buttonClass = "button";
-
-  // if (props.confirm) {
-  //   buttonClass += " button--confirm";
-  // }
-  
-  // if (props.danger) {
-  //   buttonClass += " button--danger";
-  // }

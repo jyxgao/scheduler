@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { getAppointmentsForDay, getSpotsRemaining } from '../../helpers/selectors';
+import { getSpotsRemaining } from '../../helpers/selectors';
 
 export function useApplicationData () {
   const bookInterview = (appointmentId, interview) => {
@@ -67,7 +67,7 @@ export function useApplicationData () {
         spots: getSpotsRemaining(state, state.day)
       }))
     })
-  }, [state.days])
+  }, [state])
 
   // useEffect(() => {
       // axios.get('/api/days')
