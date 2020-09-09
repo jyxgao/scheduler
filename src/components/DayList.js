@@ -6,7 +6,6 @@ const DayList = props => {
   const {days} = props;
   const dayListItems = days.map(day => {
     return (
-      <ul>
         <DayListItem 
           key={day.id}
           name={day.name}
@@ -14,7 +13,6 @@ const DayList = props => {
           selected={day.name === props.day}
           setDay={props.setDay}
         />
-      </ul>
     )
   });
 

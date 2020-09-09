@@ -3,6 +3,14 @@ import axios from 'axios';
 import { getSpotsRemaining } from '../../helpers/selectors';
 
 export function useApplicationData () {
+  // const getSpotsForDay = (day, appointments) => day.appointments.length-day.appointments.reduce((count, id) => {
+  //   if (appointments[id].interview) {
+  //     return count+1;
+  //   } else {
+  //     return count;
+  //   }
+  // })
+
   const bookInterview = (appointmentId, interview) => {
     const appointment = {
       // get current interview
@@ -15,11 +23,20 @@ export function useApplicationData () {
       [appointmentId]: appointment
     }
 
+    // const days = state.days.map(day => {
+    //   if (day.appointments.includes(appointmentId)) {
+    //     return { ...day, spots: day.appointments.length-1}
+    //   }
+    //   return day;
+    // })
+
+
     return axios.put(`/api/appointments/${appointmentId}`, appointment)
       .then(res => {
           setState((prev) => ({
             ...prev,
             appointments
+            // days
         }))
       })
   }
@@ -35,11 +52,20 @@ export function useApplicationData () {
       [appointmentId]: appointment
     }
 
-    return axios.delete(`http://localhost:8001/api/appointments/${appointmentId}`, appointment)
+    // const day = {
+    //   ...state.days[]
+    // }
+    // const days = {
+    //   ...state.days,
+    //   spots: getSpotsRemaining(state, state.day)
+    // }
+   
+    return axios.delete(`/api/appointments/${appointmentId}`, appointment)
     .then(res => {
       setState(prev => ({
         ...prev,
         appointments
+        // days
       }))
     })
   }
@@ -48,8 +74,8 @@ export function useApplicationData () {
     day: "Monday",
     days: [],
     appointments: {},
-    interviewers: {},
-    spots: 5
+    interviewers: {}
+    // spots: 5
   })
 
   useEffect(() => {
@@ -64,18 +90,11 @@ export function useApplicationData () {
         days: response[0].data,
         appointments: response[1].data,
         interviewers: response[2].data,
-        spots: getSpotsRemaining(state, state.day)
+        // spots: getSpotsRemaining(state, state.day)
       }))
     })
-  }, [state])
 
-  // useEffect(() => {
-      // axios.get('/api/days')
-  //   setState(prev => ({
-  //     ...prev,
-  //     spots: getSpotsRemaining(state, state.day)
-  //   }))
-  // }, [state.spots])
+  }, []) //[state]
 
   const setDay = day => 
     setState(prev => ({

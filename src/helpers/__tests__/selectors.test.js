@@ -1,5 +1,5 @@
 import { getAppointmentsForDay, getInterview, getSpotsRemaining } from "../selectors";
-import { getInterviewersForDay } from "../selectors";
+import { getInterviewersForDay, getSpotsForDay } from "../selectors";
 
 const state = {
   days: [
@@ -7,13 +7,15 @@ const state = {
       id: 1,
       name: "Monday",
       appointments: [1, 2, 3],
-      interviewers: [1, 2, 3, 4]
+      interviewers: [1, 2, 3, 4],
+      spots: 2
     },
     {
       id: 2,
       name: "Tuesday",
       appointments: [4, 5],
-      interviewers: [2, 3]
+      interviewers: [2, 3],
+      spots: 3
     }
   ],
   appointments: {
@@ -54,6 +56,19 @@ const state = {
     }
   }
 };
+
+//getSpotsForDay
+test("getSpotsRemaining returns a number", () => {
+  const result = getSpotsForDay(state, "Monday");
+  expect(typeof result).toEqual("number");
+})
+
+test("getSpotsRemaining to return the number of null interviews", () => {
+  const result = getSpotsForDay(state, "Monday");
+  const result2 = getSpotsForDay(state, "Tuesday")
+  expect(result).toEqual(2);
+  expect(result2).toEqual(3);
+})
 
 //getSpotsRemaining tests
 test("getSpotsRemaining returns a number", () => {
