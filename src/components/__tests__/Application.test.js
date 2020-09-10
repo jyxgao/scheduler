@@ -1,11 +1,7 @@
-// we need React.createElement to render our component
 import React from "react";
-// import helper function(s) from react-testing library
 import { render, cleanup, getByRole, waitForElement, fireEvent, getByText, prettyDOM, getAllByTestId, getByPlaceholderText, getByAltText, waitForElementToBeRemoved, queryByText, getByDisplayValue } from "@testing-library/react";
-// import component we're testing
 import Application from "components/Application";
 import axios from 'axios';
-
 
 afterEach(cleanup);
 
@@ -56,7 +52,6 @@ describe("Application", () => {
     );
     
     expect(getByText(day, /no spots remaining/i)).toBeInTheDocument();
-    // debug()
     });
     
   xit("loads data, cancels an interview and increases the spots remaining for Monday by 1", async() => {
@@ -82,7 +77,6 @@ describe("Application", () => {
       queryByText(day, "Monday")
       );
       expect(getByText(day, /2 spots remaining/i)).toBeInTheDocument();
-      // debug()
   });
 
   it("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
@@ -99,14 +93,12 @@ describe("Application", () => {
     fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
       target: { value: "Lisa Jones"}
     });
-    // fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
     fireEvent.click(getByText(appointment, "Save"));
     expect(getByText(appointment, "Saving")).toBeInTheDocument();
 
     await waitForElementToBeRemoved(() => getByText(appointment, "Saving"))
 
     expect(getByText(appointment, "Lisa Jones")).toBeInTheDocument();
-    debug()
     
     const day = getAllByTestId(container, "day").find(day => 
       queryByText(day, "Monday")
