@@ -26,13 +26,16 @@ const Appointment = props => {
 
   // get name, interviewer from Form input
   const onSave = (name, interviewer) => {
+    let create = null;
+    mode === CREATE ? create = true : create = false;
+
     const interview = {
       student: name,
       interviewer: interviewer
     }
 
     transition(SAVING);
-    props.bookInterview(props.id, interview)
+    props.bookInterview(props.id, interview, create)
     .then(() => transition(SHOW))
     .catch(err => {
       transition(ERROR_SAVE, true)
@@ -76,7 +79,7 @@ const Appointment = props => {
       message="Saving"
     />)}
     {mode === CONFIRM && (<Confirm 
-      message="Are you sure?"
+      message="Are you sure you would like to delete?"
       onCancel={() => back(SHOW)}
       onConfirm={remove}
     />)}
@@ -91,11 +94,11 @@ const Appointment = props => {
       interviewer={props.interview.interviewer.id}
     />)}
     {mode === ERROR_SAVE && (<Error 
-      message="Error Saving"
+      message="Could not book appointment"
       onClose={() => transition(props.interview? SHOW : EMPTY)}
     />)}
     {mode === ERROR_DELETE && (<Error 
-      message="Error Deleting"
+      message="Could not cancel appointment"
       onClose={() => transition(SHOW)}
     />)}
     </article>

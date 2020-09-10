@@ -53,10 +53,10 @@ export function getInterviewersForDay (state, day) {
 }
 
 // get the spots remaining given a day (ie "Monday")
-export function getSpotsRemaining (state, day) {
+// export function getSpotsRemaining (state, day) {
 
-  const noInterviews = getAppointmentsForDay(state, day).filter((appointment) => (!appointment.interview))
-  const spotsRemaining = noInterviews.length;
-  return spotsRemaining;
+//   const noInterviews = getAppointmentsForDay(state, day).filter((appointment) => (!appointment.interview))
+//   const spotsRemaining = noInterviews.length;
+//   return spotsRemaining;
 
-}
+// }

@@ -58,30 +58,30 @@ const state = {
 };
 
 //getSpotsForDay
-test("getSpotsRemaining returns a number", () => {
-  const result = getSpotsForDay(state, "Monday");
-  expect(typeof result).toEqual("number");
-})
+// test("getSpotsRemaining returns a number", () => {
+//   const result = getSpotsForDay(state, "Monday");
+//   expect(typeof result).toEqual("number");
+// })
 
-test("getSpotsRemaining to return the number of null interviews", () => {
-  const result = getSpotsForDay(state, "Monday");
-  const result2 = getSpotsForDay(state, "Tuesday")
-  expect(result).toEqual(2);
-  expect(result2).toEqual(3);
-})
+// test("getSpotsRemaining to return the number of null interviews", () => {
+//   const result = getSpotsForDay(state, "Monday");
+//   const result2 = getSpotsForDay(state, "Tuesday")
+//   expect(result).toEqual(2);
+//   expect(result2).toEqual(3);
+// })
 
-//getSpotsRemaining tests
-test("getSpotsRemaining returns a number", () => {
-  const result = getSpotsRemaining(state, "Monday");
-  expect(typeof result).toEqual("number");
-})
+// //getSpotsRemaining tests
+// test("getSpotsRemaining returns a number", () => {
+//   const result = getSpotsRemaining(state, "Monday");
+//   expect(typeof result).toEqual("number");
+// })
 
-test("getSpotsRemaining to return the number of null interviews", () => {
-  const result = getSpotsRemaining(state, "Monday");
-  const result2 = getSpotsRemaining(state, "Tuesday")
-  expect(result).toEqual(2);
-  expect(result2).toEqual(1);
-})
+// test("getSpotsRemaining to return the number of null interviews", () => {
+//   const result = getSpotsRemaining(state, "Monday");
+//   const result2 = getSpotsRemaining(state, "Tuesday")
+//   expect(result).toEqual(2);
+//   expect(result2).toEqual(1);
+// })
 
 // getInterviewsForDay tests
 test("getInterviewersForDay returns an array", () => {
