@@ -38,7 +38,16 @@ npm start
 ```sh
 npm test
 ```
+## Running Cypress End-To-End Test 
 
+  ### API test server: 
+  ```sh
+  npm run test:server
+  ```
+  ### Start Cypress:
+  ```sh
+  npm run cypress
+  ```
 ## Running Storybook Visual Testbed
 
 ```sh
