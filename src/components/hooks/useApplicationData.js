@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
-
 import axios from 'axios';
-
 
 export function useApplicationData () {
   const updateSpots = function (increment) {
@@ -71,7 +69,6 @@ export function useApplicationData () {
     days: [],
     appointments: {},
     interviewers: {},
-    // spots: 5
   })
 
   useEffect(() => {
@@ -88,7 +85,6 @@ export function useApplicationData () {
         interviewers: response[2].data,
       }))
     })
-
   }, [])
 
   const setDay = day => 
@@ -96,7 +92,6 @@ export function useApplicationData () {
       ...prev,
       day: day
     }))
-  
 
   return {
     state,

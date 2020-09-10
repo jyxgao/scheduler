@@ -1,6 +1,5 @@
 import React from 'react';
 import DayListItem from './DayListItem';
-// import { DayListItem } from 'components/DayListItem';
 
 const DayList = props => {
   const {days} = props;

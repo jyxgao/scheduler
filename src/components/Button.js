@@ -3,7 +3,6 @@ import classnames from "classnames";
 
 import "components/Button.scss";
 
-//parent
 export default function Button(props) {
   const buttonClass = classnames(
     "button", {

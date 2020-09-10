@@ -103,7 +103,6 @@ const Appointment = props => {
     />)}
     </article>
   )
-
 }
 
 export default Appointment;

@@ -1,8 +1,8 @@
+
 export function getAppointmentsForDay (state, day) {
   const result = [];
 
   if (Array.isArray(state.days)) {
-    //returns array of ids for day
     
     const appointmentOfDay = state.days.filter((obj) => obj.name === day)[0];
     if (!appointmentOfDay) {
@@ -35,7 +35,6 @@ export function getInterviewersForDay (state, day) {
   const result = [];
 
   if (Array.isArray(state.days)) {
-    //returns array of ids for day
     const interviewersOfDay = state.days.filter((obj) => obj.name === day)[0];
     if (!interviewersOfDay) {
       return result;
@@ -51,12 +50,3 @@ export function getInterviewersForDay (state, day) {
   }
   return result;
 }
-
-// get the spots remaining given a day (ie "Monday")
-// export function getSpotsRemaining (state, day) {
-
-//   const noInterviews = getAppointmentsForDay(state, day).filter((appointment) => (!appointment.interview))
-//   const spotsRemaining = noInterviews.length;
-//   return spotsRemaining;
-
-// }
