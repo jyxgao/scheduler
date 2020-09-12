@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Error = (props) => {
   return (
@@ -14,7 +14,7 @@ const Error = (props) => {
         onClick={props.onClose}
       />
     </main>
-  )
-}
+  );
+};
 
 export default Error;
